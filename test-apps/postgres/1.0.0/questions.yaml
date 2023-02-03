@@ -1,8 +1,8 @@
 groups:
   - name: "Postgres Login"
     description: "Configure postgres User"
-  - name: Storage and Persistence
-    description: Persist and Share Data that is Separate from the Container
+  - name: "Storage and Persistence"
+    description: "Persist and Share Data that is Separate from the Container"
 
 
 
@@ -37,157 +37,157 @@ questions:
           type: string
 
   - variable: persistence
-      label: Integrated Persistent Storage
-      description: Integrated Persistent Storage
-      group: Storage and Persistence
+      label: "Integrated Persistent Storage"
+      description: "Integrated Persistent Storage"
+      group: "Storage and Persistence"
       schema:
         additional_attrs: true
         type: dict
         attrs:
           - variable: config
-            label: App Config Storage
-            description: Stores the Application Configuration.
+            label: "App Config Storage"
+            description: "Stores the Application Configuration."
             schema:
               additional_attrs: true
               type: dict
               attrs:
                 - variable: type
-                  label: Type of Storage
-                  description: Sets the persistence type, Anything other than PVC could break rollback!
+                  label: "Type of Storage"
+                  description: "Sets the persistence type, Anything other than PVC could break rollback!"
                   schema:
                     type: string
                     default: pvc
                     enum:
                       - value: pvc
-                        description: PVC
+                        description: "PVC"
                       - value: hostPath
-                        description: Host Path
+                        description: "Host Path"
                       - value: emptyDir
-                        description: emptyDir
+                        description: "emptyDir"
                       - value: nfs
-                        description: NFS Share
+                        description: "NFS Share"
                 - variable: server
-                  label: NFS Server
+                  label: "NFS Server"
                   schema:
                     show_if: [["type", "=", "nfs"]]
                     type: string
                     default: ""
                 - variable: path
-                  label: Path on NFS Server
+                  label: "Path on NFS Server"
                   schema:
                     show_if: [["type", "=", "nfs"]]
                     type: string
                     default: ""
                 - variable: setPermissions
-                  label: Automatic Permissions
-                  description: Automatically set permissions on install
+                  label: "Automatic Permissions"
+                  description: "Automatically set permissions on install"
                   schema:
                     show_if: [["type", "=", "hostPath"]]
                     type: boolean
                     default: false
                 - variable: readOnly
-                  label: Read Only
+                  label: "Read Only"
                   schema:
                     type: boolean
                     default: false
                 - variable: hostPath
-                  label: Host Path
-                  description: Path inside the container the storage is mounted
+                  label: "Host Path"
+                  description: "Path inside the container the storage is mounted"
                   schema:
                     show_if: [["type", "=", "hostPath"]]
-                    type: hostpath
+                    type: "hostpath"
                 - variable: medium
-                  label: EmptyDir Medium
+                  label: "EmptyDir Medium"
                   schema:
                     show_if: [["type", "=", "emptyDir"]]
                     type: string
                     default: ""
                     enum:
                       - value: ""
-                        description: Default
+                        description: "Default"
                       - value: Memory
-                        description: Memory
+                        description: "Memory"
                 - variable: size
-                  label: Size quotum of Storage (Do NOT REDUCE after installation)
-                  description: This value can ONLY be INCREASED after the installation
+                  label:" Size quotum of Storage (Do NOT REDUCE after installation)"
+                  description: "This value can ONLY be INCREASED after the installation"
                   schema:
                     show_if: [["type", "=", "pvc"]]
                     type: string
-                    default: 256Gi
+                    default: "256Gi"
   - variable: persistenceList
-    label: Additional App Storage
-    group: Storage and Persistence
+    label: "Additional App Storage"
+    group: "Storage and Persistence"
     schema:
       type: list
       default: []
       items:
         - variable: persistenceListEntry
-          label: Custom Storage
+          label: "Custom Storage"
           schema:
             additional_attrs: true
             type: dict
             attrs:
               - variable: enabled
-                label: Enable the storage
+                label: "Enable the storage"
                 schema:
                   type: boolean
                   default: true
                   hidden: true
               - variable: type
-                label: Type of Storage
-                description: Sets the persistence type, Anything other than PVC could break rollback!
+                label: "Type of Storage"
+                description: "Sets the persistence type, Anything other than PVC could break rollback!"
                 schema:
                   type: string
                   default: hostPath
                   enum:
                     - value: pvc
-                      description: PVC
+                      description: "PVC"
                     - value: hostPath
-                      description: Host Path
+                      description: "Host Path"
                     - value: emptyDir
                       description: emptyDir
                     - value: nfs
-                      description: NFS Share
+                      description: "NFS Share"
               - variable: server
-                label: NFS Server
+                label: "NFS Server"
                 schema:
                   show_if: [["type", "=", "nfs"]]
                   type: string
                   default: ""
               - variable: path
-                label: Path on NFS Server
+                label: "Path on NFS Server"
                 schema:
                   show_if: [["type", "=", "nfs"]]
                   type: string
                   default: ""
               - variable: setPermissions
-                label: Automatic Permissions
-                description: Automatically set permissions on install
+                label: "Automatic Permissions"
+                description: "Automatically set permissions on install"
                 schema:
                   show_if: [["type", "=", "hostPath"]]
                   type: boolean
                   default: false
               - variable: readOnly
-                label: Read Only
+                label: "Read Only"
                 schema:
                   type: boolean
                   default: false
               - variable: hostPath
-                label: Host Path
-                description: Path inside the container the storage is mounted
+                label: "Host Path"
+                description: "Path inside the container the storage is mounted"
                 schema:
                   show_if: [["type", "=", "hostPath"]]
                   type: hostpath
               - variable: mountPath
-                label: Mount Path
-                description: Path inside the container the storage is mounted
+                label: "Mount Path"
+                description: "Path inside the container the storage is mounted"
                 schema:
                   type: string
                   default: ""
                   required: true
                   valid_chars: '^\/([a-zA-Z0-9._-]+(\s?[a-zA-Z0-9._-]+|\/?))+$'
               - variable: medium
-                label: EmptyDir Medium
+                label: "EmptyDir Medium"
                 schema:
                   show_if: [["type", "=", "emptyDir"]]
                   type: string
@@ -195,11 +195,11 @@ questions:
                   enum:
                     - value: ""
                       description: Default
-                    - value: Memory
-                      description: Memory
+                    - value: "Memory"
+                      description: "Memory"
               - variable: size
-                label: Size Quotum of Storage
+                label: "Size Quotum of Storage"
                 schema:
                   show_if: [["type", "=", "pvc"]]
                   type: string
-                  default: 256Gi
+                  default: "256Gi"
