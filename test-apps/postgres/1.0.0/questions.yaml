@@ -1,0 +1,34 @@
+groups:
+  - name: "Postgres Login"
+    description: "Configure postgres User"
+
+
+portals:
+  web_portal:
+    protocols:
+      - "http"
+    host:
+      - "$node_ip"
+    ports:
+      - "$variable-plexServiceTCP.port"
+    path: "/web"
+
+questions:
+  - variable: userConfig
+    label: "User Configuration"
+    group: "Postgres Login"
+    schema:
+      type: dict
+      attrs:        
+      - variable: name
+        label: "Name"
+        schema:
+          type: string
+      - variable: password
+        label: "Password"
+        schema:
+          type: string
+      - variable: dbname
+        label: "DB Name"
+        schema:
+          type: string    

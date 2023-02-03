@@ -1,0 +1,9 @@
+image:
+  repository: postgres
+  pullPolicy: IfNotPresent
+  tag: 15.1
+
+persistence:
+  config:
+    enabled: true
+    mountPath: "/config"
