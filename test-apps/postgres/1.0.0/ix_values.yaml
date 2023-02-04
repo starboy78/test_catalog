@@ -2,6 +2,12 @@ image:
   repository: postgres
   pullPolicy: IfNotPresent
   tag: 15.1
+service:
+  main:
+    ports:
+      main:
+        port: 5432
+        targetPort: 5432
 persistence:
   config:
     enabled: true
