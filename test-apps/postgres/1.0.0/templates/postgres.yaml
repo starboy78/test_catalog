@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: postgres-app
-          image: postgres:latest # Sets Image
+          image: "{{.Values.image}}" # Sets Image
           imagePullPolicy: "IfNotPresent"
           ports:
             - containerPort: 5432  # Exposes container port
