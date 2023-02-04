@@ -25,9 +25,6 @@ spec:
               value: "test-user"
             - name: POSTGRES_DB
               value: "test-db"
-          volumeMounts:
-            - mountPath: /var/lib/postgresql/data
-              name: postgredb
 ---
 apiVersion: v1
 kind: Service
