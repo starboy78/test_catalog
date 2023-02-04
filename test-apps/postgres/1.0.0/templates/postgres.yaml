@@ -1,31 +1,31 @@
-# apiVersion: apps/v1
-# kind: Deployment
-# metadata:
-#   name: postgres-app  # Sets Deployment name
-# spec:
-#   replicas: 1
-#   selector:
-#     matchLabels:
-#       app: postgres-app
-#   template:
-#     metadata:
-#       labels:
-#         app: postgres-app
-#     spec:
-#       containers:
-#         - name: postgres-app
-#           image: postgres:latest # Sets Image
-#           imagePullPolicy: "IfNotPresent"
-#           ports:
-#             - containerPort: 5432  # Exposes container port
-#           env:
-#             - name: POSTGRES_PASSWORD
-#               value: "test-pass"
-#             - name: POSTGRES_USER
-#               value: "test-user"
-#             - name: POSTGRES_DB
-#               value: "test-db"
-# ---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-app  # Sets Deployment name
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres-app
+  template:
+    metadata:
+      labels:
+        app: postgres-app
+    spec:
+      containers:
+        - name: postgres-app
+          image: postgres:latest # Sets Image
+          imagePullPolicy: "IfNotPresent"
+          ports:
+            - containerPort: 5432  # Exposes container port
+          env:
+            - name: POSTGRES_PASSWORD
+              value: "test-pass"
+            - name: POSTGRES_USER
+              value: "test-user"
+            - name: POSTGRES_DB
+              value: "test-db"
+---
 # apiVersion: v1
 # kind: Service
 # metadata:
