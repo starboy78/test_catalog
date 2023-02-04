@@ -32,7 +32,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: postgres-service # Sets service name
+  name: {{ include "postgres.fullname" . }}-service # Sets service name
   labels:
     app: {{ include "postgres.fullname" . }} # Labels and Selectors
 spec:
