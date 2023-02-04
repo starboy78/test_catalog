@@ -26,3 +26,15 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-service # Sets service name
+  labels:
+    app: {{ include "postgres.fullname" . }} # Labels and Selectors
+spec:
+  ports:
+    - port: 5432 # Sets port to run the postgres application
+  selector:
+    app: {{ include "postgres.fullname" . }}
