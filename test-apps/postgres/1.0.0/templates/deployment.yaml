@@ -52,8 +52,7 @@ metadata:
   labels:
     app: {{ include "postgres.fullname" . }}
 spec:
-  type: local
-  storageClassName: ix-storage-class-{{ include "postgres.fullname" . }}
+  storageClassName: manual
   capacity:
     storage: 5Gi # Sets PV Volume
   accessModes:
@@ -66,7 +65,7 @@ metadata:
   labels:
     app: {{ include "postgres.fullname" . }}
 spec:
-  storageClassName: ix-storage-class-{{ include "postgres.fullname" . }}
+  storageClassName: manual
   accessModes:
     - ReadWriteMany  # Sets read and write access
   resources:
