@@ -44,19 +44,19 @@ spec:
     - port: 5432 # Sets port to run the postgres application
   selector:
     app: {{ include "postgres.fullname" . }}
----
-kind: PersistentVolume
-apiVersion: v1
-metadata:
-  name: {{ include "postgres.fullname" . }}-pv  # Sets PV's name
-  labels:
-    app: {{ include "postgres.fullname" . }}
-spec:
-  storageClassName: manual
-  capacity:
-    storage: 5Gi # Sets PV Volume
-  accessModes:
-    - ReadWriteMany
+# ---
+# kind: PersistentVolume
+# apiVersion: v1
+# metadata:
+#   name: {{ include "postgres.fullname" . }}-pv  # Sets PV's name
+#   labels:
+#     app: {{ include "postgres.fullname" . }}
+# spec:
+#   storageClassName: ix-storage-class-{{ include "postgres.fullname" . }}
+#   capacity:
+#     storage: 5Gi # Sets PV Volume
+#   accessModes:
+#     - ReadWriteMany
 ---
 kind: PersistentVolumeClaim
 apiVersion: v1
@@ -65,7 +65,7 @@ metadata:
   labels:
     app: {{ include "postgres.fullname" . }}
 spec:
-  storageClassName: manual
+  storageClassName: ix-storage-class-{{ include "postgres.fullname" . }}
   accessModes:
     - ReadWriteMany  # Sets read and write access
   resources:
