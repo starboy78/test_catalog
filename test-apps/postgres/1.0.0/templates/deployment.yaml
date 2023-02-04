@@ -1,9 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "postgres.fullname" . }}
-  labels:
-    {{- include "postgres.labels" . | nindent 4 }}
+  name: {{ include "postgres.fullname" . }}  # Sets Deployment name
 spec:
   replicas: 1
   selector:
@@ -16,19 +14,31 @@ spec:
     spec:
       containers:
         - name: {{ .Chart.Name }}
-          securityContext:
-            {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          image:  "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}" # Sets Image
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
-            - containerPort: 5432
+            - containerPort: 5432  # Exposes container port
+          env:
+            - name: POSTGRES_PASSWORD
+              value: "linkedmatrix"
+            - name: POSTGRES_USER
+              value: "lm"
+            - name: POSTGRES_DB
+              value: "linkedmatrix"
+      #     volumeMounts:
+      #       - mountPath: /var/lib/postgresql/data
+      #         name: postgredb
+      # volumes:
+      #   - name: postgredb
+      #     persistentVolumeClaim:
+      #       claimName: postgres-pv-claim
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: {{ include "postgres.fullname" . }}-service # Sets service name
   labels:
-    app: {{ include "postgres.fullname" . }} # Labels and Selectors
+    app: {{ include "postgres.fullname" . }}  # Labels and Selectors
 spec:
   ports:
     - port: 5432 # Sets port to run the postgres application
