@@ -16,8 +16,8 @@
 #         - name: postgres-app
 #           image: "{{.Values.image.repository}}" # Sets Image
 #           imagePullPolicy: "IfNotPresent"
-#           ports:
-#             - containerPort: 5432  # Exposes container port
+          # ports:
+          #   - containerPort: 5432  # Exposes container port
 #           env:
 #             - name: POSTGRES_PASSWORD
 #               value: "test-pass"
